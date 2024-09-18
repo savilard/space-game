@@ -1,22 +1,29 @@
 import asyncio
 import curses
+import random
 import time
 
 TIC_TIMEOUT = 0.1
 
 
 def draw(canvas):
-    row, column = (5, 20)
+    star_count = 100
+    star_symbols = '+*.:'
+
+    max_row, max_column = curses.window.getmaxyx(canvas)
+
     canvas.border()
     curses.curs_set(False)
     canvas.refresh()
 
     coroutines = [
-        blink(canvas, row, 5),
-        blink(canvas, row, 10),
-        blink(canvas, row, 15),
-        blink(canvas, row, 20),
-        blink(canvas, row, 25),
+        blink(
+            canvas=canvas,
+            row=random.randint(2, max_row - 2),
+            column=random.randint(2, max_column - 2),
+            symbol=random.choice(star_symbols),
+        )
+        for _ in range(star_count)
     ]
 
     while True:
