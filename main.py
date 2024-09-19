@@ -3,6 +3,8 @@ import curses
 import random
 import time
 
+from fire_animation import fire
+
 TIC_TIMEOUT = 0.1
 
 
@@ -25,6 +27,13 @@ def draw(canvas):
         )
         for _ in range(star_count)
     ]
+
+    fire_coroutines = [
+        fire(canvas=canvas, start_row=max_row - 2, start_column=max_column / 2)
+        for _ in range(100)
+    ]
+
+    coroutines.extend(fire_coroutines)
 
     while True:
         for coroutine in coroutines.copy():
