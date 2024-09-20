@@ -43,7 +43,7 @@ def draw(canvas):
     coroutines.extend(fire_coroutines)
     coroutines.append(animate_spaceship(
         canvas=canvas,
-        row=30,
+        row=max_row / 2,
         column=max_column / 2,
         rocket_frame_1=rocket_frame_1,
         rocket_frame_2=rocket_frame_2,
