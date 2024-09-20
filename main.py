@@ -19,10 +19,10 @@ def draw(canvas):
     curses.curs_set(False)
     canvas.refresh()
 
-    with open('rocket_frame_1.txt', 'r') as rocket_frame_1_file:
+    with open('animation_frames/rocket/rocket_frame_1.txt', 'r') as rocket_frame_1_file:
         rocket_frame_1 = rocket_frame_1_file.read()
 
-    with open('rocket_frame_2.txt', 'r') as rocket_frame_2_file:
+    with open('animation_frames/rocket/rocket_frame_2.txt', 'r') as rocket_frame_2_file:
         rocket_frame_2 = rocket_frame_2_file.read()
 
     coroutines = [
