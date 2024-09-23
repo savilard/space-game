@@ -3,8 +3,8 @@ import curses
 import random
 import time
 
-from fire_animation import fire
-from spaceship_animation import animate_spaceship
+from animations.fire import fire
+from animations.spaceship import animate_spaceship
 
 TIC_TIMEOUT = 0.1
 
@@ -19,11 +19,11 @@ def draw(canvas):
     curses.curs_set(False)
     canvas.refresh()
 
-    with open('animation_frames/rocket/rocket_frame_1.txt', 'r') as rocket_frame_1_file:
-        rocket_frame_1 = rocket_frame_1_file.read()
+    with open('animations/frames/spaceship/frame_1.txt', 'r') as spaceship_frame_1_file:
+        spaceship_frame_1 = spaceship_frame_1_file.read()
 
-    with open('animation_frames/rocket/rocket_frame_2.txt', 'r') as rocket_frame_2_file:
-        rocket_frame_2 = rocket_frame_2_file.read()
+    with open('animations/frames/spaceship/frame_2.txt', 'r') as spaceship_frame_2_file:
+        spaceship_frame_2 = spaceship_frame_2_file.read()
 
     coroutines = [
         blink(
@@ -35,18 +35,13 @@ def draw(canvas):
         for _ in range(star_count)
     ]
 
-    fire_coroutines = [
-        fire(canvas=canvas, start_row=max_row - 2, start_column=max_column / 2)
-        for _ in range(100)
-    ]
-
-    coroutines.extend(fire_coroutines)
+    coroutines.append(fire(canvas=canvas, start_row=max_row - 2, start_column=max_column / 2))
     coroutines.append(animate_spaceship(
         canvas=canvas,
         row=max_row / 2,
         column=max_column / 2,
-        rocket_frame_1=rocket_frame_1,
-        rocket_frame_2=rocket_frame_2,
+        spaceship_frame_1=spaceship_frame_1,
+        spaceship_frame_2=spaceship_frame_2,
     ))
 
     while True:
