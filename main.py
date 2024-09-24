@@ -17,6 +17,7 @@ def draw(canvas):
 
     canvas.border()
     curses.curs_set(False)
+    canvas.nodelay(True)
     canvas.refresh()
 
     with open('animations/frames/spaceship/frame_1.txt', 'r') as spaceship_frame_1_file:
@@ -38,8 +39,8 @@ def draw(canvas):
     coroutines.append(fire(canvas=canvas, start_row=max_row - 2, start_column=max_column / 2))
     coroutines.append(animate_spaceship(
         canvas=canvas,
-        row=max_row / 2,
-        column=max_column / 2,
+        start_row=max_row / 2,
+        start_column=max_column / 2,
         spaceship_frame_1=spaceship_frame_1,
         spaceship_frame_2=spaceship_frame_2,
     ))
