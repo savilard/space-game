@@ -43,6 +43,8 @@ def draw(canvas):
         start_column=max_column / 2,
         spaceship_frame_1=spaceship_frame_1,
         spaceship_frame_2=spaceship_frame_2,
+        max_row=max_row,
+        max_column=max_column,
     ))
 
     while True:
