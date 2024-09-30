@@ -2,6 +2,7 @@ import asyncio
 import curses
 import random
 import time
+from pathlib import Path
 
 from animations.fire import fire
 from animations.spaceship import animate_spaceship
@@ -20,10 +21,10 @@ def draw(canvas):
     canvas.nodelay(True)
     canvas.refresh()
 
-    with open('animations/frames/spaceship/frame_1.txt', 'r') as spaceship_frame_1_file:
+    with open(Path.cwd() / 'animations' / 'frames' / 'spaceship' / 'frame_1.txt', 'r') as spaceship_frame_1_file:
         spaceship_frame_1 = spaceship_frame_1_file.read()
 
-    with open('animations/frames/spaceship/frame_2.txt', 'r') as spaceship_frame_2_file:
+    with open(Path.cwd() / 'animations' / 'frames' / 'spaceship' / 'frame_2.txt', 'r') as spaceship_frame_2_file:
         spaceship_frame_2 = spaceship_frame_2_file.read()
 
     coroutines = [
