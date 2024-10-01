@@ -7,12 +7,11 @@ from animations.blink import blink
 from animations.fire import fire
 from animations.spaceship import animate_spaceship
 
-TIC_TIMEOUT = 0.1
-
 
 def draw(canvas: curses.window):
     star_count = 100
     star_symbols = '+*.:'
+    tic_timeout = 0.1
 
     max_row, max_column = curses.window.getmaxyx(canvas)
 
@@ -60,7 +59,7 @@ def draw(canvas: curses.window):
             if len(coroutines) == 0:
                 break
         canvas.refresh()
-        time.sleep(TIC_TIMEOUT)
+        time.sleep(tic_timeout)
 
 
 if __name__ == '__main__':
