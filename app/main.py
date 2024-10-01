@@ -10,7 +10,7 @@ from animations.spaceship import animate_spaceship
 TIC_TIMEOUT = 0.1
 
 
-def draw(canvas):
+def draw(canvas: curses.window):
     star_count = 100
     star_symbols = '+*.:'
 
@@ -63,7 +63,7 @@ def draw(canvas):
         time.sleep(TIC_TIMEOUT)
 
 
-async def blink(canvas, row, column, symbol='*'):
+async def blink(canvas: curses.window, row: int, column: int, symbol: str = '*'):
     while True:
         for _ in range(random.randint(1, 20)):
             await asyncio.sleep(0)

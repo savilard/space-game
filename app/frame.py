@@ -1,4 +1,7 @@
-def draw_frame(canvas, start_row, start_column, text, negative=False):
+import curses
+
+
+def draw_frame(canvas: curses.window, start_row: int, start_column: int, text: str, negative: bool = False):
     """Draw multiline text fragment on canvas, erase text instead of drawing if negative=True is specified."""
 
     rows_number, columns_number = canvas.getmaxyx()
@@ -30,8 +33,8 @@ def draw_frame(canvas, start_row, start_column, text, negative=False):
             canvas.addch(row, column, symbol)
 
 
-def get_frame_size(text):
-    """Calculate size of multiline text fragment, return pair — number of rows and colums."""
+def get_frame_size(text: str):
+    """Calculate size of multiline text fragment, return pair — number of rows and columns."""
 
     lines = text.splitlines()
     rows = len(lines)

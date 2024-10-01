@@ -1,4 +1,5 @@
 import asyncio
+import curses
 import itertools
 
 from frame import draw_frame, get_frame_size
@@ -6,13 +7,13 @@ from keyboard.controls import read_controls
 
 
 async def animate_spaceship(
-    canvas,
-    start_row,
-    start_column,
-    spaceship_frame_1,
-    spaceship_frame_2,
-    max_row,
-    max_column,
+    canvas: curses.window,
+    start_row: int,
+    start_column: int,
+    spaceship_frame_1: str,
+    spaceship_frame_2: str,
+    max_row: int,
+    max_column: int,
     screen_border: int = 2,
 ):
     row, column = start_row, start_column

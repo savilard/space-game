@@ -1,7 +1,9 @@
+import curses
+
 from keyboard.codes import KeyboardCodes
 
 
-def read_controls(canvas):
+def read_controls(canvas: curses.window):
     """Read keys pressed and returns tuple with controls state."""
 
     rows_direction = columns_direction = 0
