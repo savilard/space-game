@@ -1,7 +1,7 @@
 import asyncio
 import itertools
 
-from curses_tools import draw_frame, get_frame_size
+from frame import draw_frame, get_frame_size
 from keyboard.controls import read_controls
 
 
