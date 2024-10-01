@@ -1,9 +1,9 @@
-import asyncio
 import curses
 import random
 import time
 from pathlib import Path
 
+from animations.blink import blink
 from animations.fire import fire
 from animations.spaceship import animate_spaceship
 
@@ -61,28 +61,6 @@ def draw(canvas: curses.window):
                 break
         canvas.refresh()
         time.sleep(TIC_TIMEOUT)
-
-
-async def blink(canvas: curses.window, row: int, column: int, symbol: str = '*'):
-    while True:
-        for _ in range(random.randint(1, 20)):
-            await asyncio.sleep(0)
-
-        canvas.addstr(row, column, symbol, curses.A_DIM)
-        for _ in range(20):
-            await asyncio.sleep(0)
-
-        canvas.addstr(row, column, symbol)
-        for _ in range(3):
-            await asyncio.sleep(0)
-
-        canvas.addstr(row, column, symbol, curses.A_BOLD)
-        for _ in range(5):
-            await asyncio.sleep(0)
-
-        canvas.addstr(row, column, symbol)
-        for _ in range(3):
-            await asyncio.sleep(0)
 
 
 if __name__ == '__main__':
