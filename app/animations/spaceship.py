@@ -1,7 +1,8 @@
 import asyncio
 import itertools
 
-from curses_tools import draw_frame, get_frame_size, read_controls
+from curses_tools import draw_frame, get_frame_size
+from keyboard.controls import read_controls
 
 
 async def animate_spaceship(
