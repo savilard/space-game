@@ -21,10 +21,13 @@ def draw(canvas):
     canvas.nodelay(True)
     canvas.refresh()
 
-    with open(Path.cwd() / 'animations' / 'frames' / 'spaceship' / 'frame_1.txt', 'r') as spaceship_frame_1_file:
+    spaceship_frame1_path = Path.cwd() / 'app' / 'animations' / 'frames' / 'spaceship' / 'frame_1.txt'
+    spaceship_frame2_path = Path.cwd() / 'app' / 'animations' / 'frames' / 'spaceship' / 'frame_2.txt'
+
+    with open(spaceship_frame1_path, 'r') as spaceship_frame_1_file:
         spaceship_frame_1 = spaceship_frame_1_file.read()
 
-    with open(Path.cwd() / 'animations' / 'frames' / 'spaceship' / 'frame_2.txt', 'r') as spaceship_frame_2_file:
+    with open(spaceship_frame2_path) as spaceship_frame_2_file:
         spaceship_frame_2 = spaceship_frame_2_file.read()
 
     coroutines = [
