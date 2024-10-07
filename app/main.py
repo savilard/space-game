@@ -1,4 +1,5 @@
 import curses
+import functools
 import random
 import time
 from pathlib import Path
@@ -8,13 +9,12 @@ from animations.fire import fire
 from animations.spaceship import animate_spaceship
 
 
-def draw(canvas: curses.window):
-    star_count = 100
-    star_symbols = '+*.:'
-    tic_timeout = 0.1
-
-    max_row, max_column = curses.window.getmaxyx(canvas)
-
+def draw(
+    canvas: curses.window,
+    star_count: int,
+    star_symbols: str,
+    tic_timeout: float,
+):
     canvas.border()
     curses.curs_set(False)
     canvas.nodelay(True)
@@ -28,6 +28,8 @@ def draw(canvas: curses.window):
 
     with open(spaceship_frame2_path) as spaceship_frame_2_file:
         spaceship_frame_2 = spaceship_frame_2_file.read()
+
+    max_row, max_column = curses.window.getmaxyx(canvas)
 
     coroutines = [
         blink(
@@ -64,4 +66,11 @@ def draw(canvas: curses.window):
 
 if __name__ == '__main__':
     curses.update_lines_cols()
-    curses.wrapper(draw)
+    curses.wrapper(
+        functools.partial(
+            draw,
+            star_count=100,
+            star_symbols='+*.:',
+            tic_timeout=0.1,
+        ),
+    )
