@@ -41,18 +41,26 @@ def draw(
         for _ in range(star_count)
     ]
 
-    coroutines.append(fire(canvas=canvas, start_row=max_row - 2, start_column=max_column / 2))
-    coroutines.append(animate_spaceship(
-        canvas=canvas,
-        start_row=max_row / 2,
-        start_column=max_column / 2,
-        spaceship_frame_1=spaceship_frame_1,
-        spaceship_frame_2=spaceship_frame_2,
-        max_row=max_row,
-        max_column=max_column,
-    ))
+    coroutines.append(
+        fire(
+            canvas=canvas,
+            start_row=max_row - 2,
+            start_column=max_column / 2,
+        ),
+    )
+    coroutines.append(
+        animate_spaceship(
+            canvas=canvas,
+            start_row=max_row / 2,
+            start_column=max_column / 2,
+            spaceship_frame_1=spaceship_frame_1,
+            spaceship_frame_2=spaceship_frame_2,
+            max_row=max_row,
+            max_column=max_column,
+        ),
+    )
 
-    while True:
+    while True:  # noqa: WPS457
         for coroutine in coroutines.copy():
             try:
                 coroutine.send(None)
