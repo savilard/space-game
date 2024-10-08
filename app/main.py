@@ -34,9 +34,9 @@ def draw(
     coroutines = [
         blink(
             canvas=canvas,
-            row=random.randint(2, max_row - 2),
-            column=random.randint(2, max_column - 2),
-            symbol=random.choice(star_symbols),
+            row=random.SystemRandom().randint(2, max_row - 2),
+            column=random.SystemRandom().randint(2, max_column - 2),
+            symbol=random.SystemRandom().choice(star_symbols),
         )
         for _ in range(star_count)
     ]
