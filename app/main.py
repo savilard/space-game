@@ -72,7 +72,7 @@ def draw(
         time.sleep(tic_timeout)
 
 
-if __name__ == '__main__':
+def main():
     curses.update_lines_cols()
     curses.wrapper(
         functools.partial(
@@ -82,3 +82,7 @@ if __name__ == '__main__':
             tic_timeout=0.1,
         ),
     )
+
+
+if __name__ == '__main__':
+    main()
