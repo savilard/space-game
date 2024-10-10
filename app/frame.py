@@ -1,9 +1,18 @@
 import curses
 
 
-def draw_frame(canvas: curses.window, start_row: int, start_column: int, text: str, negative: bool = False):
-    """Draw multiline text fragment on canvas, erase text instead of drawing if negative=True is specified."""
+def draw_frame(  # noqa: WPS210
+    canvas: curses.window,
+    start_row: int,
+    start_column: int,
+    text: str,
+    negative: bool = False,
+):
+    """
+    Draw multiline text fragment on canvas.
 
+    Erase text instead of drawing if negative=True is specified.
+    """
     rows_number, columns_number = canvas.getmaxyx()
 
     for row, line in enumerate(text.splitlines(), round(start_row)):
@@ -23,19 +32,23 @@ def draw_frame(canvas: curses.window, start_row: int, start_column: int, text: s
             if symbol == ' ':
                 continue
 
-            # Check that current position it is not in a lower right corner of the window
-            # Curses will raise exception in that case. Don`t ask why…
             # https://docs.python.org/3/library/curses.html#curses.window.addch
             if row == rows_number - 1 and column == columns_number - 1:
                 continue
 
-            symbol = symbol if not negative else ' '
+            symbol = ' ' if negative else symbol
             canvas.addch(row, column, symbol)
 
 
 def get_frame_size(text: str):
-    """Calculate size of multiline text fragment, return pair — number of rows and columns."""
+    """Calculate size of multiline text fragment.
 
+    Args:
+        text:  multiline text fragment
+
+    Returns:
+        tuple: pair — number of rows and columns
+    """
     lines = text.splitlines()
     rows = len(lines)
     columns = max([len(line) for line in lines])

@@ -5,6 +5,7 @@ from draw import draw
 
 
 def main():
+    """Entry point."""
     curses.update_lines_cols()
     curses.wrapper(
         functools.partial(

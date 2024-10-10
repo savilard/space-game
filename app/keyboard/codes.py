@@ -1,6 +1,6 @@
 class KeyboardCodes:
-    SPACE_KEY_CODE = 32
-    LEFT_KEY_CODE = 260
-    RIGHT_KEY_CODE = 261
-    UP_KEY_CODE = 259
-    DOWN_KEY_CODE = 258
+    space_key_code = 32
+    left_key_code = 260
+    right_key_code = 261
+    up_key_code = 259
+    down_key_code = 258
