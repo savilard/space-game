@@ -22,11 +22,11 @@ def draw(
     spaceship_frame1_path = Path.cwd() / 'app' / 'animations' / 'frames' / 'spaceship' / 'frame_1.txt'
     spaceship_frame2_path = Path.cwd() / 'app' / 'animations' / 'frames' / 'spaceship' / 'frame_2.txt'
 
-    with open(spaceship_frame1_path, 'r') as spaceship_frame_1_file:
-        spaceship_frame_1 = spaceship_frame_1_file.read()
+    with open(spaceship_frame1_path, 'r') as spaceship_frame1_file:
+        spaceship_frame1 = spaceship_frame1_file.read()
 
-    with open(spaceship_frame2_path) as spaceship_frame_2_file:
-        spaceship_frame_2 = spaceship_frame_2_file.read()
+    with open(spaceship_frame2_path) as spaceship_frame2_file:
+        spaceship_frame2 = spaceship_frame2_file.read()
 
     max_row, max_column = curses.window.getmaxyx(canvas)
 
@@ -52,8 +52,8 @@ def draw(
             canvas=canvas,
             start_row=max_row / 2,
             start_column=max_column / 2,
-            spaceship_frame_1=spaceship_frame_1,
-            spaceship_frame_2=spaceship_frame_2,
+            spaceship_frame1=spaceship_frame1,
+            spaceship_frame2=spaceship_frame2,
             max_row=max_row,
             max_column=max_column,
         ),

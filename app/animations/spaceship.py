@@ -10,15 +10,15 @@ async def animate_spaceship(
     canvas: curses.window,
     start_row: int,
     start_column: int,
-    spaceship_frame_1: str,
-    spaceship_frame_2: str,
+    spaceship_frame1: str,
+    spaceship_frame2: str,
     max_row: int,
     max_column: int,
     screen_border: int = 2,
 ):
     row, column = start_row, start_column
 
-    for spaceship_frame in itertools.cycle([spaceship_frame_1, spaceship_frame_2]):
+    for spaceship_frame in itertools.cycle([spaceship_frame1, spaceship_frame2]):
         spaceship_frame_height, spaceship_frame_width = get_frame_size(spaceship_frame)
 
         row = min(max(screen_border, row), max_row - spaceship_frame_height)
