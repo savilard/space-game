@@ -22,6 +22,8 @@ def draw(
     spaceship_frame1_path = Path.cwd() / 'app' / 'animations' / 'frames' / 'spaceship' / 'frame_1.txt'
     spaceship_frame2_path = Path.cwd() / 'app' / 'animations' / 'frames' / 'spaceship' / 'frame_2.txt'
 
+    screen_border_width = 2
+
     with open(spaceship_frame1_path, 'r') as spaceship_frame1_file:
         spaceship_frame1 = spaceship_frame1_file.read()
 
@@ -33,8 +35,8 @@ def draw(
     coroutines = [
         blink(
             canvas=canvas,
-            row=random.SystemRandom().randint(2, max_row - 2),
-            column=random.SystemRandom().randint(2, max_column - 2),
+            row=random.SystemRandom().randint(screen_border_width, max_row - screen_border_width),
+            column=random.SystemRandom().randint(screen_border_width, max_column - screen_border_width),
             symbol=random.SystemRandom().choice(star_symbols),
         )
         for _ in range(star_count)
@@ -56,6 +58,7 @@ def draw(
             spaceship_frame2=spaceship_frame2,
             max_row=max_row,
             max_column=max_column,
+            screen_border_width=screen_border_width,
         ),
     )
 

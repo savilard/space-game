@@ -14,15 +14,15 @@ async def animate_spaceship(
     spaceship_frame2: str,
     max_row: int,
     max_column: int,
-    screen_border: int = 2,
+    screen_border_width: int,
 ):
     row, column = start_row, start_column
 
     for spaceship_frame in itertools.cycle([spaceship_frame1, spaceship_frame2]):
         spaceship_frame_height, spaceship_frame_width = get_frame_size(spaceship_frame)
 
-        row = min(max(screen_border, row), max_row - spaceship_frame_height)
-        column = min(max(screen_border, column), max_column - spaceship_frame_width)
+        row = min(max(screen_border_width, row), max_row - spaceship_frame_height)
+        column = min(max(screen_border_width, column), max_column - spaceship_frame_width)
 
         draw_frame(canvas, row, column, spaceship_frame)
         canvas.refresh()
