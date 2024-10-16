@@ -25,7 +25,6 @@ async def animate_spaceship(
         column = min(max(screen_border_width, column), max_column - spaceship_frame_width)
 
         draw_frame(canvas, row, column, spaceship_frame)
-        canvas.refresh()
 
         for _ in range(2):
             await asyncio.sleep(0)
