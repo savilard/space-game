@@ -18,7 +18,9 @@ async def animate_spaceship(
 ):
     row, column = start_row, start_column
 
-    for spaceship_frame in itertools.cycle([spaceship_frame1, spaceship_frame2]):
+    spaceship_frames = [spaceship_frame1, spaceship_frame1, spaceship_frame2, spaceship_frame2]
+
+    for spaceship_frame in itertools.cycle(spaceship_frames):
         spaceship_frame_height, spaceship_frame_width = get_frame_size(spaceship_frame)
 
         row = min(max(screen_border_width, row), max_row - spaceship_frame_height)
@@ -26,8 +28,7 @@ async def animate_spaceship(
 
         draw_frame(canvas, row, column, spaceship_frame)
 
-        for _ in range(2):
-            await asyncio.sleep(0)
+        await asyncio.sleep(0)
 
         draw_frame(canvas, row, column, spaceship_frame, negative=True)
 
