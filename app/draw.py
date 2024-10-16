@@ -53,8 +53,6 @@ def draw(
     coroutines.append(
         animate_spaceship(
             canvas=canvas,
-            start_row=max_row / 2,
-            start_column=max_column / 2,
             spaceship_frame1=spaceship_frame1,
             spaceship_frame2=spaceship_frame2,
             max_row=max_row,

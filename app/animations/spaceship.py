@@ -8,15 +8,14 @@ from keyboard.controls import read_controls
 
 async def animate_spaceship(
     canvas: curses.window,
-    start_row: int,
-    start_column: int,
     spaceship_frame1: str,
     spaceship_frame2: str,
     max_row: int,
     max_column: int,
     screen_border_width: int,
 ):
-    row, column = start_row, start_column
+    row = max_row / 2
+    column = max_column / 2
 
     spaceship_frames = [spaceship_frame1, spaceship_frame1, spaceship_frame2, spaceship_frame2]
 
