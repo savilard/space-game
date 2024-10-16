@@ -38,6 +38,7 @@ def draw(
             row=random.SystemRandom().randint(screen_border_width, max_row - screen_border_width),
             column=random.SystemRandom().randint(screen_border_width, max_column - screen_border_width),
             symbol=random.SystemRandom().choice(star_symbols),
+            offset_tics=random.randint(1, 20),
         )
         for _ in range(star_count)
     ]

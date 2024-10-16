@@ -3,9 +3,15 @@ import curses
 import random
 
 
-async def blink(canvas: curses.window, row: int, column: int, symbol: str = '*'):
+async def blink(
+    canvas: curses.window,
+    row: int,
+    column: int,
+    offset_tics: int,
+    symbol: str = '*',
+):
     while True:
-        for _ in range(random.randint(1, 20)):
+        for _ in range(offset_tics):
             await asyncio.sleep(0)
 
         canvas.addstr(row, column, symbol, curses.A_DIM)
