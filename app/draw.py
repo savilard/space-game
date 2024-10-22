@@ -5,6 +5,7 @@ from pathlib import Path
 
 from animations.blink import blink
 from animations.fire import fire
+from animations.space_garbage import fly_garbage
 from animations.spaceship import animate_spaceship
 
 
@@ -21,6 +22,7 @@ def draw(
 
     spaceship_frame1_path = Path.cwd() / 'app' / 'animations' / 'frames' / 'spaceship' / 'frame_1.txt'
     spaceship_frame2_path = Path.cwd() / 'app' / 'animations' / 'frames' / 'spaceship' / 'frame_2.txt'
+    garbage_frame_path = Path.cwd() / 'app' / 'animations' / 'frames' / 'space_garbage' / 'hubble.txt'
 
     screen_border_width = 2
 
@@ -29,6 +31,9 @@ def draw(
 
     with open(spaceship_frame2_path) as spaceship_frame2_file:
         spaceship_frame2 = spaceship_frame2_file.read()
+
+    with open(garbage_frame_path, 'r') as garbage_file:
+        garbage_frame = garbage_file.read()
 
     max_row, max_column = curses.window.getmaxyx(canvas)
 
@@ -59,6 +64,9 @@ def draw(
             max_column=max_column,
             screen_border_width=screen_border_width,
         ),
+    )
+    coroutines.append(
+        fly_garbage(canvas, column=10, garbage_frame=garbage_frame)
     )
 
     while True:  # noqa: WPS457
