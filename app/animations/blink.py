@@ -2,6 +2,8 @@ import asyncio
 import curses
 import random
 
+from sleep import sleep
+
 
 async def blink(
     canvas: curses.window,
@@ -11,21 +13,17 @@ async def blink(
     symbol: str = '*',
 ):
     while True:
-        for _ in range(offset_tics):
-            await asyncio.sleep(0)
+
+        await sleep(tics=offset_tics)
 
         canvas.addstr(row, column, symbol, curses.A_DIM)
-        for _ in range(20):
-            await asyncio.sleep(0)
+        await sleep(tics=20)
 
         canvas.addstr(row, column, symbol)
-        for _ in range(3):
-            await asyncio.sleep(0)
+        await sleep(tics=3)
 
         canvas.addstr(row, column, symbol, curses.A_BOLD)
-        for _ in range(5):
-            await asyncio.sleep(0)
+        await sleep(tics=5)
 
         canvas.addstr(row, column, symbol)
-        for _ in range(3):
-            await asyncio.sleep(0)
+        await sleep(tics=3)

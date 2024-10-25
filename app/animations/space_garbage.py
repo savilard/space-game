@@ -1,9 +1,9 @@
 import asyncio
 import curses
 import random
-from asyncio import coroutine
 
 from frame import draw_frame
+from sleep import sleep
 
 
 async def fly_garbage(canvas, column, garbage_frame, speed=0.5):
@@ -36,8 +36,7 @@ async def fill_orbit_with_garbage(
         with open(random_garbage_frame_path, 'r') as garbage_file:
             garbage_frame = garbage_file.read()
 
-        for _ in range(offset_tics):
-            await asyncio.sleep(0)
+        await sleep(tics=offset_tics)
 
         column = random.SystemRandom().randint(screen_border_width, max_column)
 
