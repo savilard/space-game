@@ -3,8 +3,8 @@ import curses
 import random
 
 from frame import draw_frame, get_frame_size
-from global_vars import OBSTACLES
-from obstacles import Obstacle
+from global_vars import OBSTACLES, OBSTACLES_IN_LAST_COLLISIONS
+from obstacles import Obstacle, has_collision
 from sleep import sleep
 
 
@@ -23,6 +23,11 @@ async def fly_garbage(canvas, column, garbage_frame, speed=0.5):
 
     try:
         while row < rows_number:
+
+            if obstacle in OBSTACLES_IN_LAST_COLLISIONS:
+                OBSTACLES_IN_LAST_COLLISIONS.remove(obstacle)
+                return None
+
             draw_frame(canvas, row, column, garbage_frame)
             obstacle.row = row
             await asyncio.sleep(0)

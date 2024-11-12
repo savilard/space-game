@@ -1,7 +1,7 @@
 import asyncio
 import curses
 
-from global_vars import OBSTACLES
+from global_vars import OBSTACLES, OBSTACLES_IN_LAST_COLLISIONS
 from obstacles import has_collision
 
 
@@ -33,6 +33,7 @@ async def fire(
             (row, column),
         )
         if is_has_collision:
+            OBSTACLES_IN_LAST_COLLISIONS.append(obstacle)
             return None
 
     symbol = '-' if columns_speed else '|'
