@@ -2,6 +2,7 @@ import asyncio
 import curses
 import random
 
+from animations.explosion import explode
 from frame import draw_frame, get_frame_size
 from global_vars import OBSTACLES, OBSTACLES_IN_LAST_COLLISIONS
 from obstacles import Obstacle, has_collision
@@ -26,6 +27,9 @@ async def fly_garbage(canvas, column, garbage_frame, speed=0.5):
 
             if obstacle in OBSTACLES_IN_LAST_COLLISIONS:
                 OBSTACLES_IN_LAST_COLLISIONS.remove(obstacle)
+
+                await explode(canvas, row + rows_size // 2, column + columns_size // 2)
+
                 return None
 
             draw_frame(canvas, row, column, garbage_frame)
