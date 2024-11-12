@@ -1,0 +1,1 @@
+OBSTACLES = []

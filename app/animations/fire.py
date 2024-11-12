@@ -1,6 +1,9 @@
 import asyncio
 import curses
 
+from global_vars import OBSTACLES
+from obstacles import has_collision
+
 
 async def fire(
     canvas: curses.window,
@@ -22,6 +25,15 @@ async def fire(
 
     row += rows_speed
     column += columns_speed
+
+    for obstacle in OBSTACLES:
+        is_has_collision = has_collision(
+            (obstacle.row, obstacle.column),
+            (obstacle.rows_size, obstacle.columns_size),
+            (row, column),
+        )
+        if is_has_collision:
+            return None
 
     symbol = '-' if columns_speed else '|'
 

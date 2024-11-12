@@ -6,6 +6,7 @@ from pathlib import Path
 from animations.blink import blink
 from animations.space_garbage import fill_orbit_with_garbage
 from animations.spaceship import animate_spaceship
+from global_vars import OBSTACLES
 from obstacles import show_obstacles
 
 
@@ -19,8 +20,6 @@ def draw(
     curses.curs_set(False)
     canvas.nodelay(True)
     canvas.refresh()
-
-    obstacles = []
 
     spaceship_frame1_path = Path.cwd() / 'app' / 'animations' / 'frames' / 'spaceship' / 'frame_1.txt'
     spaceship_frame2_path = Path.cwd() / 'app' / 'animations' / 'frames' / 'spaceship' / 'frame_2.txt'
@@ -49,6 +48,8 @@ def draw(
         for _ in range(star_count)
     ]
 
+    coroutines.append(show_obstacles(canvas=canvas, obstacles=OBSTACLES))
+
     coroutines.append(
         animate_spaceship(
             coroutines=coroutines,
@@ -68,10 +69,8 @@ def draw(
             max_column=max_column,
             screen_border_width=screen_border_width,
             offset_tics=random.randint(1, 50),
-            obstacles=obstacles,
         )
     )
-    coroutines.append(show_obstacles(canvas=canvas, obstacles=obstacles))
 
     while True:  # noqa: WPS457
         for coroutine in coroutines.copy():
