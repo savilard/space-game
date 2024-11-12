@@ -4,7 +4,6 @@ import time
 from pathlib import Path
 
 from animations.blink import blink
-from animations.fire import fire
 from animations.space_garbage import fill_orbit_with_garbage
 from animations.spaceship import animate_spaceship
 
@@ -48,14 +47,8 @@ def draw(
     ]
 
     coroutines.append(
-        fire(
-            canvas=canvas,
-            start_row=max_row - 2,
-            start_column=max_column / 2,
-        ),
-    )
-    coroutines.append(
         animate_spaceship(
+            coroutines=coroutines,
             canvas=canvas,
             spaceship_frame1=spaceship_frame1,
             spaceship_frame2=spaceship_frame2,

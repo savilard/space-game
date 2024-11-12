@@ -2,12 +2,14 @@ import asyncio
 import curses
 import itertools
 
+from animations.fire import fire
 from frame import draw_frame, get_frame_size
 from keyboard.controls import read_controls
 from physics import update_speed
 
 
 async def animate_spaceship(
+    coroutines,
     canvas: curses.window,
     spaceship_frame1: str,
     spaceship_frame2: str,
@@ -35,6 +37,15 @@ async def animate_spaceship(
         draw_frame(canvas, row, column, spaceship_frame, negative=True)
 
         rows_direction, columns_direction, space_pressed = read_controls(canvas=canvas)
+
+        if space_pressed:
+            coroutines.append(
+                fire(
+                    canvas=canvas,
+                    start_row=row,
+                    start_column=column + screen_border_width,
+                ),
+            )
 
         row_speed, column_speed = update_speed(
             row_speed, column_speed, rows_direction, columns_direction,
