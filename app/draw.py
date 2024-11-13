@@ -27,6 +27,8 @@ def draw(
     garbage_frames_folder = Path.cwd() / 'app' / 'animations' / 'frames' / 'space_garbage'
     garbage_frames_path = [frame_path for frame_path in Path(garbage_frames_folder).rglob('*.txt')]
 
+    game_over_frame_path = Path.cwd() / 'app' / 'animations' / 'frames' / 'game_over.txt'
+
     screen_border_width = 2
 
     with open(spaceship_frame1_path, 'r') as spaceship_frame1_file:
@@ -34,6 +36,9 @@ def draw(
 
     with open(spaceship_frame2_path) as spaceship_frame2_file:
         spaceship_frame2 = spaceship_frame2_file.read()
+
+    with open(game_over_frame_path) as game_over_frame_file:
+        game_over_frame = game_over_frame_file.read()
 
     max_row, max_column = curses.window.getmaxyx(canvas)
 
@@ -59,6 +64,7 @@ def draw(
             max_row=max_row,
             max_column=max_column,
             screen_border_width=screen_border_width,
+            game_over_frame=game_over_frame,
         ),
     )
     coroutines.append(
