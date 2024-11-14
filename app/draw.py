@@ -16,10 +16,20 @@ def draw(
     star_symbols: str,
     tic_timeout: float,
 ):
-    canvas.border()
     curses.curs_set(False)
-    canvas.nodelay(True)
-    canvas.refresh()
+
+    max_row, max_column = curses.window.getmaxyx(canvas)
+
+    text_canvas_height = 3
+
+    game_canvas = canvas.derwin(max_row - text_canvas_height, max_column, 0, 0)
+    game_canvas.nodelay(True)
+    game_canvas.border()
+    game_canvas.keypad(True)
+    game_canvas_max_row, game_canvas_max_column = game_canvas.getmaxyx()
+
+    text_canvas = canvas.derwin(text_canvas_height, max_column, max_row - text_canvas_height, 0)
+    text_canvas.nodelay(True)
 
     spaceship_frame1_path = Path.cwd() / 'app' / 'animations' / 'frames' / 'spaceship' / 'frame_1.txt'
     spaceship_frame2_path = Path.cwd() / 'app' / 'animations' / 'frames' / 'spaceship' / 'frame_2.txt'
@@ -40,13 +50,11 @@ def draw(
     with open(game_over_frame_path) as game_over_frame_file:
         game_over_frame = game_over_frame_file.read()
 
-    max_row, max_column = curses.window.getmaxyx(canvas)
-
     coroutines = [
         blink(
-            canvas=canvas,
-            row=random.SystemRandom().randint(screen_border_width, max_row - screen_border_width),
-            column=random.SystemRandom().randint(screen_border_width, max_column - screen_border_width),
+            canvas=game_canvas,
+            row=random.SystemRandom().randint(screen_border_width, game_canvas_max_row - screen_border_width),
+            column=random.SystemRandom().randint(screen_border_width, game_canvas_max_column - screen_border_width),
             symbol=random.SystemRandom().choice(star_symbols),
             offset_tics=random.randint(1, 20),
         )
@@ -58,11 +66,11 @@ def draw(
     coroutines.append(
         animate_spaceship(
             coroutines=coroutines,
-            canvas=canvas,
+            canvas=game_canvas,
             spaceship_frame1=spaceship_frame1,
             spaceship_frame2=spaceship_frame2,
-            max_row=max_row,
-            max_column=max_column,
+            max_row=game_canvas_max_row,
+            max_column=game_canvas_max_column,
             screen_border_width=screen_border_width,
             game_over_frame=game_over_frame,
         ),
@@ -70,9 +78,9 @@ def draw(
     coroutines.append(
         fill_orbit_with_garbage(
             coroutines=coroutines,
-            canvas=canvas,
+            canvas=game_canvas,
             garbage_frames_path=garbage_frames_path,
-            max_column=max_column,
+            max_column=game_canvas_max_column,
             screen_border_width=screen_border_width,
             offset_tics=random.randint(1, 50),
         )
@@ -86,5 +94,6 @@ def draw(
                 coroutines.remove(coroutine)
             if len(coroutines) == 0:
                 break
-        canvas.refresh()
+        game_canvas.refresh()
+        # game_canvas.border()
         time.sleep(tic_timeout)
