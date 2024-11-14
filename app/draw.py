@@ -4,6 +4,7 @@ import time
 from pathlib import Path
 
 from animations.blink import blink
+from animations.current_year import show_current_year
 from animations.space_garbage import fill_orbit_with_garbage
 from animations.spaceship import animate_spaceship
 from global_vars import OBSTACLES
@@ -85,6 +86,7 @@ def draw(
             offset_tics=random.randint(1, 50),
         )
     )
+    coroutines.append(show_current_year(canvas=text_canvas))
 
     while True:  # noqa: WPS457
         for coroutine in coroutines.copy():
@@ -94,6 +96,7 @@ def draw(
                 coroutines.remove(coroutine)
             if len(coroutines) == 0:
                 break
+
         game_canvas.refresh()
-        # game_canvas.border()
+
         time.sleep(tic_timeout)
