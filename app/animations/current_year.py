@@ -14,15 +14,12 @@ PHRASES = {
 
 
 async def show_current_year(canvas):
-    year = 1957
+    year_row_position = 1
+    year_column_position = 1
 
     while True:
-        message = f'Year now: {year} - {PHRASES.get(year, '')}'
-
-        canvas.addstr(0, 0, message)
+        message = f'Year now: {YEARS['year']} - {PHRASES.get(YEARS['year'], '')}'
+        canvas.addstr(year_row_position, year_column_position, message)
         await sleep(15)
-
-        year += 1
-        YEARS['year'] = year
-
+        YEARS['year'] += 1
         canvas.refresh()
