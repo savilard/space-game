@@ -62,8 +62,6 @@ def draw(
         for _ in range(star_count)
     ]
 
-    coroutines.append(show_obstacles(canvas=canvas, obstacles=OBSTACLES))
-
     coroutines.append(
         animate_spaceship(
             coroutines=coroutines,
@@ -83,7 +81,6 @@ def draw(
             garbage_frames_path=garbage_frames_path,
             max_column=game_canvas_max_column,
             screen_border_width=screen_border_width,
-            offset_tics=random.randint(1, 50),
         )
     )
     coroutines.append(show_current_year(canvas=text_canvas))

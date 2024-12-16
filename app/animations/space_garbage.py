@@ -4,7 +4,8 @@ import random
 
 from animations.explosion import explode
 from frame import draw_frame, get_frame_size
-from global_vars import OBSTACLES, OBSTACLES_IN_LAST_COLLISIONS
+from game_scenario import get_garbage_delay_tics
+from global_vars import OBSTACLES, OBSTACLES_IN_LAST_COLLISIONS, YEARS
 from obstacles import Obstacle, has_collision
 from sleep import sleep
 
@@ -47,18 +48,21 @@ async def fill_orbit_with_garbage(
     garbage_frames_path: list[str],
     max_column: int,
     screen_border_width: int,
-    offset_tics: int,
 ):
     while True:
-        random_garbage_frame_path = random.SystemRandom().choice(garbage_frames_path)
+        await asyncio.sleep(0)
 
-        with open(random_garbage_frame_path, 'r') as garbage_file:
-            garbage_frame = garbage_file.read()
+        offset_tics = get_garbage_delay_tics(year=YEARS['year'])
+        if offset_tics is None:
+            continue
 
         await sleep(tics=offset_tics)
 
-        column = random.SystemRandom().randint(screen_border_width, max_column)
+        random_garbage_frame_path = random.SystemRandom().choice(garbage_frames_path)
+        with open(random_garbage_frame_path, 'r') as garbage_file:
+            garbage_frame = garbage_file.read()
 
+        column = random.SystemRandom().randint(screen_border_width, max_column)
         coroutines.append(
             fly_garbage(canvas, column=column, garbage_frame=garbage_frame)
         )
